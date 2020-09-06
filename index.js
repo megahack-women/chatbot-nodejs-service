@@ -24,13 +24,15 @@ app.get('/meuid-authorization/authorize/:id', (req, res, next) => {
 app.get('/authorization', async (req, res, next) => {
   const { code, code_verifier, parameters } = req.query
   
-  const { origin } = atob(parameters)
+  const { origin, session} = atob(parameters)
 
   const response = await client.post('/token', {
     authorization_code: code,
     code_verifier: code_verifier,
     client_id: 'e769bcfe-eed7-4f1f-afe0-4563fa5d8b17',
+    sessionId: session,
     origin,
+    parameters,
     client_secret: 'lxqdxJmSWhSBJjhzglbsiUvJRRoRoXsFNlxAYubriQdHPicTcyLtNLiQcmFEZAngRhVKkmLjoJJmjQIVpeOGUppTkDiDojNdShHMxLlSeesfUVUvUpuYLqQGyzEnIbaoHOjJDTOxIxOzxZFWkaDdHvfqbVpKqugvsHaViGIVZqrUDCscviFyUaXwbSmiuHUkHmmkfrwASjjSPxJQMtOXmqIgAfCTNBDFhDZGmN',
     grant_type: "authorization_code"
   })
