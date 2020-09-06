@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express()
 const port = 9999
 const messages = require('./messages')
+const client = require('./client')
 app.use(cors())
 
 app.get('/:id', (req, res) => {
@@ -16,20 +17,16 @@ app.post('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/authorization', (req, res, next) => {
-  res.send({ body: req.body, params: req.params, query: req.query })
-})
-
-app.post('/authorization', (req, res, next) => {
-  res.send({ body: req.body, params: req.params, query: req.query, method: 'post'})
-})
-
-app.put('/authorization', (req, res, next) => {
-  res.send({ body: req.body, params: req.params, query: req.query, method: 'put' })
-})
-
-app.delete('/authorization', (req, res, next) => {
-  res.send({ body: req.body, params: req.params, query: req.query, method: 'del' })
+app.get('/authorization', async (req, res, next) => {
+  const { code, code_verifier } = req.query
+  const response = await client.post('/', {
+    authorization_code = code,
+    code_verifier = code_verifier,
+    client_id = 'e769bcfe-eed7-4f1f-afe0-4563fa5d8b17',
+    client_secret = 'lxqdxJmSWhSBJjhzglbsiUvJRRoRoXsFNlxAYubriQdHPicTcyLtNLiQcmFEZAngRhVKkmLjoJJmjQIVpeOGUppTkDiDojNdShHMxLlSeesfUVUvUpuYLqQGyzEnIbaoHOjJDTOxIxOzxZFWkaDdHvfqbVpKqugvsHaViGIVZqrUDCscviFyUaXwbSmiuHUkHmmkfrwASjjSPxJQMtOXmqIgAfCTNBDFhDZGmN',
+    grant_type = "authorization_code"
+  })
+  res.send(response)
 })
 
 app.listen(process.env.PORT || port, () => {
