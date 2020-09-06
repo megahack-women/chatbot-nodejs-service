@@ -24,8 +24,9 @@ app.get('/meuid-authorization/authorize/:id', (req, res, next) => {
 app.get('/authorization', async (req, res, next) => {
   const { code, code_verifier, parameters } = req.query
   
-  const { origin, session} = atob(parameters)
+  
   try {
+    const { origin, session} = atob(parameters)
     const response = await client.post('/token', {
       authorization_code: code,
       code_verifier: code_verifier,
@@ -34,15 +35,15 @@ app.get('/authorization', async (req, res, next) => {
       client_secret: 'lxqdxJmSWhSBJjhzglbsiUvJRRoRoXsFNlxAYubriQdHPicTcyLtNLiQcmFEZAngRhVKkmLjoJJmjQIVpeOGUppTkDiDojNdShHMxLlSeesfUVUvUpuYLqQGyzEnIbaoHOjJDTOxIxOzxZFWkaDdHvfqbVpKqugvsHaViGIVZqrUDCscviFyUaXwbSmiuHUkHmmkfrwASjjSPxJQMtOXmqIgAfCTNBDFhDZGmN',
       grant_type: "authorization_code"
     })
+    
+    const { data } = response
+    client.defaults.headers.authorization = data.access_token
+    const userData = await client.get('/meuid/data')
+  
+    res.send(userData.data)
   } catch (err) {
     res.status(401).send(err)
   }
-
-  const { data } = response
-  client.defaults.headers.authorization = data.access_token
-  const userData = await client.get('/meuid/data')
-
-  res.send(userData.data)
 
 })
 
