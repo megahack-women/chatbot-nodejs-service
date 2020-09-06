@@ -27,7 +27,7 @@ app.get('/authorization', async (req, res, next) => {
   client.defaults.headers.authorization = data.access_token
   const userData = await client.get('/meuid/data')
 
-  res.send({ data: userData.data })
+  res.send(userData.data)
 
 })
 
