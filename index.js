@@ -7,12 +7,6 @@ const client = require('./client')
 const axios = require('axios')
 app.use(cors())
 
-app.get('/:id', (req, res) => {
-  console.log(req.params)
-  const { id } = req.params
-  res.send(messages.responses.find(response => response.id === id))
-})
-
 app.post('/', (req, res) => {
   console.log(req.body)
   res.send('Hello World!')
@@ -27,13 +21,10 @@ app.get('/authorization', async (req, res, next) => {
     client_id: 'e769bcfe-eed7-4f1f-afe0-4563fa5d8b17',
     client_secret: 'lxqdxJmSWhSBJjhzglbsiUvJRRoRoXsFNlxAYubriQdHPicTcyLtNLiQcmFEZAngRhVKkmLjoJJmjQIVpeOGUppTkDiDojNdShHMxLlSeesfUVUvUpuYLqQGyzEnIbaoHOjJDTOxIxOzxZFWkaDdHvfqbVpKqugvsHaViGIVZqrUDCscviFyUaXwbSmiuHUkHmmkfrwASjjSPxJQMtOXmqIgAfCTNBDFhDZGmN',
     grant_type: "authorization_code"
-  }).then(response => {
-    console.log(response)
-    res.send(response)
   })
 
-  res.send(response)
-  next()
+  res.send("response")
+
 })
 
 app.listen(process.env.PORT || port, () => {
