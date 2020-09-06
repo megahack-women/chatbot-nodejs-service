@@ -23,7 +23,11 @@ app.get('/authorization', async (req, res, next) => {
     grant_type: "authorization_code"
   })
 
-  res.send(response.data)
+  const { data } = response
+  client.defaults.headers.authorization = data.access_token
+  const userData = await client.get('/meuid/data')
+
+  res.send({ data: userData.data })
 
 })
 
