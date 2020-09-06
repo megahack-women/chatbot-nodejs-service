@@ -4,7 +4,8 @@ const app = express()
 const port = 9999
 const messages = require('./messages')
 const client = require('./client')
-const axios = require('axios')
+const atob = require('atob')
+
 app.use(cors())
 
 app.post('/', (req, res) => {
@@ -12,13 +13,24 @@ app.post('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/meuid-authorization/authorize/:id', (req, res, next) => {
+  const { id } = req.params
+  const { code, code_verifier, parameters } = req.query
+  console.log({ code, code_verifier, parameters, id })
+  res.send("tste")
+  next()
+})
+
 app.get('/authorization', async (req, res, next) => {
-  const { code, code_verifier } = req.query
+  const { code, code_verifier, parameters } = req.query
   
+  const { origin } = atob(parameters)
+
   const response = await client.post('/token', {
     authorization_code: code,
     code_verifier: code_verifier,
     client_id: 'e769bcfe-eed7-4f1f-afe0-4563fa5d8b17',
+    origin,
     client_secret: 'lxqdxJmSWhSBJjhzglbsiUvJRRoRoXsFNlxAYubriQdHPicTcyLtNLiQcmFEZAngRhVKkmLjoJJmjQIVpeOGUppTkDiDojNdShHMxLlSeesfUVUvUpuYLqQGyzEnIbaoHOjJDTOxIxOzxZFWkaDdHvfqbVpKqugvsHaViGIVZqrUDCscviFyUaXwbSmiuHUkHmmkfrwASjjSPxJQMtOXmqIgAfCTNBDFhDZGmN',
     grant_type: "authorization_code"
   })
