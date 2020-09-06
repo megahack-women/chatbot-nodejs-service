@@ -16,8 +16,20 @@ app.post('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/authorization', (req, res, next) => {
+app.get('/authorization', (req, res, next) => {
   res.send({ body: req.body, params: req.params, query: req.query })
+})
+
+app.post('/authorization', (req, res, next) => {
+  res.send({ body: req.body, params: req.params, query: req.query, method: 'post'})
+})
+
+app.put('/authorization', (req, res, next) => {
+  res.send({ body: req.body, params: req.params, query: req.query, method: 'put' })
+})
+
+app.delete('/authorization', (req, res, next) => {
+  res.send({ body: req.body, params: req.params, query: req.query, method: 'del' })
 })
 
 app.listen(process.env.PORT || port, () => {
