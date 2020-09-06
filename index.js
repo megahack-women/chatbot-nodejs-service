@@ -23,7 +23,7 @@ app.get('/authorization', async (req, res, next) => {
     grant_type: "authorization_code"
   })
 
-  res.send("response")
+  res.send(response.data)
 
 })
 
