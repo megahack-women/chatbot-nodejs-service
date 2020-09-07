@@ -175,7 +175,11 @@ const responses = [
       { value: "Boletos", label: { title: "Boletos" } },
       {
         value: "Aplicativos",
-        label: { title: "Mais de 10 anos" },
+        label: { title: "Aplicativos" },
+      },
+      {
+        value: "Outros",
+        label: { title: "Outros" },
       },
     ],
   },
@@ -225,6 +229,10 @@ const responses = [
       {
         value: "GetNet",
         label: { title: "GetNet" },
+      },
+      {
+        value: "Outros",
+        label: { title: "Outros" },
       },
     ],
   },
