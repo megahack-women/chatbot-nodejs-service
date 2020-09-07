@@ -237,22 +237,23 @@ const responses = [
         type: "string",
         received: true,
         text:
-          "Ok! E você se considera um trabalhador/empreendedor informal?\n\n Como por exemplo, costureira, pipoqueiro, marmiteiro, vendedor de utensílios, alimentos, produtos etc.",
+          "Quais dessas categorias abaixo você se encaixa?",
       },
     ],
     buttons: [],
     inputs: [],
     responses: [],
     rows: [],
-    name: "age",
-    radio: [
-      { value: "1", label: { title: "Menos de 1 ano" } },
-      { value: "1-3", label: { title: "Entre 1 e 3 anos" } },
-      { value: "3-5", label: { title: "Entre 3 e 5 anos" } },
-      { value: "5-10", label: { title: "Entre 5 e 10 anos" } },
-      { value: "10", label: { title: "Mais de 10 anos" } },
+    name: "categories",
+    checkbox: [
+      { value: "CLT", label: { title: "CLT" } },
+      { value: "Microempreendedor com MEI", label: { title: "Microempreendedor com MEI" } },
+      { value: "Empreendedor", label: { title: "Empreendedor" } },
+      { value: "PJ (Pessoa Jurídica)", label: { title: "PJ (Pessoa Jurídica)" } },
+      { value: "Autônomo Regularizado", label: { title: "Autônomo Regularizado" } },
+      { value: "Autônomo Informal", label: { title: "Autônomo Informal" } },
     ],
-    checkbox: [],
+    radio: [],
   },
 ];
 
