@@ -4,7 +4,6 @@ const app = express()
 const port = 9999
 const messages = require('./messages')
 const client = require('./client')
-const atob = require('atob')
 
 app.use(cors())
 

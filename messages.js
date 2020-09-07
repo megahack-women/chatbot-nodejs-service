@@ -37,7 +37,7 @@ const requests = [
 const responses = [
   {
     id: "question_name",
-    next: "question_income",
+    next: "question_cpf",
     height: 86,
     messages: [
       {
@@ -55,6 +55,30 @@ const responses = [
       },
     ],
     responses: ["Meu nome é {{name}}."],
+    rows: [],
+    radio: [],
+    checkbox: [],
+  },
+  {
+    id: "question_cpf",
+    next: "question_income",
+    height: 86,
+    messages: [
+      {
+        received: true,
+        text:
+          "Qual seu CPF?",
+      },
+    ],
+    buttons: [],
+    inputs: [
+      {
+        type: "number",
+        name: "cpf",
+        placeholder: "CHAT_LABEL_INPUTTEXT",
+      },
+    ],
+    responses: ["Meu CPF é {{cpf}}."],
     rows: [],
     radio: [],
     checkbox: [],
