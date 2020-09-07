@@ -8,17 +8,9 @@ const atob = require('atob')
 
 app.use(cors())
 
-app.post('/', (req, res) => {
-  console.log(req.body)
-  res.send('Hello World!')
-})
-
-app.get('/meuid-authorization/authorize/:id', (req, res, next) => {
+app.get('/message/:id', (req, res) => {
   const { id } = req.params
-  const { code, code_verifier, parameters } = req.query
-  console.log({ code, code_verifier, parameters, id })
-  res.send("tste")
-  next()
+  res.send(messages.responses.find(response => response.id === id))
 })
 
 app.get('/authorization', async (req, res, next) => {
@@ -26,7 +18,7 @@ app.get('/authorization', async (req, res, next) => {
   
   
   try {
-    const { origin, session} = atob(parameters)
+    const { origin, session } = atob(parameters)
     const response = await client.post('/token', {
       authorization_code: code,
       code_verifier: code_verifier,
@@ -35,7 +27,7 @@ app.get('/authorization', async (req, res, next) => {
       client_secret: 'lxqdxJmSWhSBJjhzglbsiUvJRRoRoXsFNlxAYubriQdHPicTcyLtNLiQcmFEZAngRhVKkmLjoJJmjQIVpeOGUppTkDiDojNdShHMxLlSeesfUVUvUpuYLqQGyzEnIbaoHOjJDTOxIxOzxZFWkaDdHvfqbVpKqugvsHaViGIVZqrUDCscviFyUaXwbSmiuHUkHmmkfrwASjjSPxJQMtOXmqIgAfCTNBDFhDZGmN',
       grant_type: "authorization_code"
     })
-    
+
     const { data } = response
     client.defaults.headers.authorization = data.access_token
     const userData = await client.get('/meuid/data')
