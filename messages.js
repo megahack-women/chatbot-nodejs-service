@@ -91,7 +91,7 @@ const responses = [
       {
         received: true,
         text:
-          "Qual é a sua renda mensal hoje? (Não se preocupe, todas as informações aqui são sigilosas).",
+          "Incluindo todas suas fontes de rendas, mesmo as informais, qual é a sua renda mensal total hoje? (Não se preocupe, todas as informações aqui são sigilosas).",
       },
     ],
     buttons: [],
@@ -174,7 +174,7 @@ const responses = [
         type: "string",
         received: true,
         text:
-          "Que bacana! Precisamos saber as forma que vc recebe o pagamento por seus produtos/serviços",
+          "Que bacana! Precisamos saber quais as formas que você recebe o pagamento por seus produtos/serviços",
       },
     ],
     buttons: [],
