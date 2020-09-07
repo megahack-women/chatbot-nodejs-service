@@ -234,6 +234,10 @@ const responses = [
         value: "Outros",
         label: { title: "Outros" },
       },
+      {
+        value: "Não uso",
+        label: { title: "Não uso" },
+      },
     ],
   },
   {
@@ -244,8 +248,7 @@ const responses = [
       {
         type: "string",
         received: true,
-        text:
-          "Quais dessas categorias abaixo você se encaixa?",
+        text: "Quais dessas categorias abaixo você se encaixa?",
       },
     ],
     buttons: [],
@@ -255,10 +258,19 @@ const responses = [
     name: "categories",
     checkbox: [
       { value: "CLT", label: { title: "CLT" } },
-      { value: "Microempreendedor com MEI", label: { title: "Microempreendedor com MEI" } },
+      {
+        value: "Microempreendedor com MEI",
+        label: { title: "Microempreendedor com MEI" },
+      },
       { value: "Empreendedor", label: { title: "Empreendedor" } },
-      { value: "PJ (Pessoa Jurídica)", label: { title: "PJ (Pessoa Jurídica)" } },
-      { value: "Autônomo Regularizado", label: { title: "Autônomo Regularizado" } },
+      {
+        value: "PJ (Pessoa Jurídica)",
+        label: { title: "PJ (Pessoa Jurídica)" },
+      },
+      {
+        value: "Autônomo Regularizado",
+        label: { title: "Autônomo Regularizado" },
+      },
       { value: "Autônomo Informal", label: { title: "Autônomo Informal" } },
     ],
     radio: [],
