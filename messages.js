@@ -38,6 +38,7 @@ const responses = [
   {
     id: "question_name",
     next: "question_income",
+    height: 86,
     messages: [
       {
         received: true,
@@ -50,16 +51,18 @@ const responses = [
       {
         type: "text",
         name: "name",
+        placeholder: "CHAT_LABEL_INPUTTEXT"
       },
     ],
     responses: ["Meu nome é {{name}}."],
     rows: [],
-    radios: [],
+    radio: [],
     checkbox: [],
   },
   {
     id: "question_income",
     next: "question_invest",
+    height: 86,
     messages: [
       {
         received: true,
@@ -71,16 +74,18 @@ const responses = [
       {
         type: "number",
         name: "amount",
+        placeholder: 'CHAT_LABEL_AMOUNT'
       },
     ],
     responses: [" R$ {{amount}}."],
     rows: [],
-    radios: [],
+    radio: [],
     checkbox: [],
   },
   {
     id: "question_invest",
     next: "question_investment_time",
+    height: 237,
     messages: [
       {
         type: "string",
@@ -106,11 +111,12 @@ const responses = [
     inputs: [],
     responses: [],
     rows: [],
-    radios: [],
+    radio: [],
     checkbox: [],
   },
   {
     id: "question_investment_time",
+    height: 237,
     next: "question_interest",
     messages: [
       { type: "string", received: true, text: "Há quanto tempo você já investe?^1000" },
@@ -119,33 +125,40 @@ const responses = [
     inputs: [],
     responses: [],
     rows: [],
-    radios: [
+    radio: [
+    ],
+    checkbox: [
       { value: "1",  name: 'age', label: { title: "Menos de 1 ano" } },
       { value: "1-3", name: 'age', label: { title: "Entre 1 e 3 anos" } },
       { value: "3-5", name: 'age', label: { title: "Entre 3 e 5 anos" } },
       { value: "5-10", name: 'age', label: { title: "Entre 5 e 10 anos" } },
       { value: "10", name: 'age', label: { title: "Mais de 10 anos" } },
     ],
-    checkbox: [],
   },
   {
     id: "question_interest",
     next: "question_???",
+    height: 237,
     messages: [
       {
         type: "string",
+        received: true,
         text:
           "Quando o assunto é administrar seus investimentos, ^500 você acha isso uma tarefa... ^1000",
       },
     ],
     buttons: [
-      { value: "A", label: { title: "Prazerosa" } },
-      { value: "B", label: { title: "Entediante" } },
     ],
     inputs: [],
     responses: [],
     rows: [],
-    radios: [],
+    radio: [
+      { value: "1",  name: 'age', label: { title: "Menos de 1 ano" } },
+      { value: "1-3", name: 'age', label: { title: "Entre 1 e 3 anos" } },
+      { value: "3-5", name: 'age', label: { title: "Entre 3 e 5 anos" } },
+      { value: "5-10", name: 'age', label: { title: "Entre 5 e 10 anos" } },
+      { value: "10", name: 'age', label: { title: "Mais de 10 anos" } },
+    ],
     checkbox: [],
   },
 ];
