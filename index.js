@@ -16,9 +16,7 @@ app.get('/message/:id', (req, res) => {
 app.get('/authorization', async (req, res, next) => {
   const { code, code_verifier, parameters } = req.query
   
-  
   try {
-    const { origin, session } = atob(parameters)
     const response = await client.post('/token', {
       authorization_code: code,
       code_verifier: code_verifier,

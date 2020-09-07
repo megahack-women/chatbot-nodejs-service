@@ -44,14 +44,14 @@ const responses = [
         received: true,
         text:
           "Vamos calcular o seu poder aquisitivo (poder de compra) para avaliar suas possibilidades de conseguir créditos e realizar seus sonhos! Você fornecerá alguns dados e receberá sua analise de crédito. Para isso temos que fazer algumas perguntas sobre a sua movimentação financeira.\n\nPrimeiramente, como podemos chamar você? (Use seu primeiro nome ou um apelido).",
-      }
+      },
     ],
     buttons: [],
     inputs: [
       {
         type: "text",
         name: "name",
-        placeholder: "CHAT_LABEL_INPUTTEXT"
+        placeholder: "CHAT_LABEL_INPUTTEXT",
       },
     ],
     responses: ["Meu nome é {{name}}."],
@@ -66,7 +66,8 @@ const responses = [
     messages: [
       {
         received: true,
-        text: "Qual é a sua renda mensal hoje?^500 (Não se preocupe,^400 todas as informações aqui são sigilosas).^1000",
+        text:
+          "Qual é a sua renda mensal hoje? (Não se preocupe, todas as informações aqui são sigilosas).",
       },
     ],
     buttons: [],
@@ -74,7 +75,7 @@ const responses = [
       {
         type: "number",
         name: "amount",
-        placeholder: 'CHAT_LABEL_AMOUNT'
+        placeholder: "CHAT_LABEL_AMOUNT",
       },
     ],
     responses: [" R$ {{amount}}."],
@@ -84,32 +85,58 @@ const responses = [
   },
   {
     id: "question_invest",
-    next: "question_investment_time",
+    next: "question_profession",
     height: 237,
     messages: [
       {
         type: "string",
         received: true,
         text:
-          "Ok! ^1000 E você já investiu alguma vez? ^1000 Sem considerar a Poupança!",
+          "Ok! E você se considera um trabalhador/empreendedor informal?\n\nComo por exemplo, costureira, pipoqueiro, marmiteiro, vendedor de utensílios, alimentos, produtos etc.",
       },
     ],
     buttons: [
       {
-        value: "A",
+        value: "Sim",
+        display: "Sim sou trabalhador/ empreendedor informal",
         label: {
-          title: "Sim, já investi",
+          title: "Sim",
         },
       },
       {
-        value: "B",
+        value: "Não",
+        display: "Não",
         label: {
-          title: "Não, nunca investi",
+          title: "Não",
         },
       },
     ],
     inputs: [],
-    responses: [],
+    responses: ["Sim sou trabalhador/ empreendedor informal"],
+    rows: [],
+    radio: [],
+    checkbox: [],
+  },
+  {
+    id: "question_profession",
+    next: "question_investment_time",
+    height: 237,
+    messages: [
+      {
+        received: true,
+        text:
+          'Legal! E como você descreveria sua atividade? Exemplo "Costuro e vendo mascaras"',
+      },
+    ],
+    buttons: [],
+    inputs: [
+      {
+        type: "text",
+        name: "activity",
+        placeholder: "CHAT_LABEL_INPUTTEXT",
+      },
+    ],
+    responses: ["Como {{activity}}."],
     rows: [],
     radio: [],
     checkbox: [],
@@ -117,47 +144,113 @@ const responses = [
   {
     id: "question_investment_time",
     height: 237,
-    next: "question_interest",
+    next: "question_payment_methods",
     messages: [
-      { type: "string", received: true, text: "Há quanto tempo você já investe?^1000" },
+      {
+        type: "string",
+        received: true,
+        text:
+          "Que bacana! Precisamos saber as forma que vc recebe o pagamento por seus produtos/serviços",
+      },
     ],
     buttons: [],
     inputs: [],
     responses: [],
     rows: [],
-    radio: [
-    ],
+    radio: [],
+    name: "paymentMethods",
     checkbox: [
-      { value: "1",  name: 'age', label: { title: "Menos de 1 ano" } },
-      { value: "1-3", name: 'age', label: { title: "Entre 1 e 3 anos" } },
-      { value: "3-5", name: 'age', label: { title: "Entre 3 e 5 anos" } },
-      { value: "5-10", name: 'age', label: { title: "Entre 5 e 10 anos" } },
-      { value: "10", name: 'age', label: { title: "Mais de 10 anos" } },
+      {
+        value: "Dinheiro em espécie",
+        label: { title: "Dinheiro em espécie" },
+      },
+      {
+        value: "Maquininha de cartão",
+        label: { title: "Maquininha de cartão" },
+      },
+      {
+        value: "Tranferências",
+        label: { title: "Tranferências" },
+      },
+      { value: "Boletos", label: { title: "Boletos" } },
+      {
+        value: "Aplicativos",
+        label: { title: "Mais de 10 anos" },
+      },
+    ],
+  },
+  {
+    id: "question_payment_methods",
+    height: 237,
+    next: "question_interest",
+    messages: [
+      {
+        type: "string",
+        received: true,
+        text:
+          "Selecione as empresa de máquina de cartão que você mais utiliza?",
+      },
+    ],
+    buttons: [],
+    inputs: [],
+    responses: [],
+    rows: [],
+    radio: [],
+    name: "paymentMethodForms",
+    checkbox: [
+      {
+        value: "Pag Seguro",
+        label: { title: "Pag Seguro" },
+      },
+      {
+        value: "Mercado Pago",
+        label: { title: "Mercado Pago" },
+      },
+      {
+        value: "Rede",
+        label: { title: "Rede" },
+      },
+      {
+        value: "Ton",
+        label: { title: "Ton" },
+      },
+      {
+        value: "SafraPay",
+        label: { title: "SafraPay" },
+      },
+      {
+        value: "Stone",
+        label: { title: "Stone" },
+      },
+      {
+        value: "GetNet",
+        label: { title: "GetNet" },
+      },
     ],
   },
   {
     id: "question_interest",
-    next: "question_???",
+    next: "end",
     height: 237,
     messages: [
       {
         type: "string",
         received: true,
         text:
-          "Quando o assunto é administrar seus investimentos, ^500 você acha isso uma tarefa... ^1000",
+          "Ok! E você se considera um trabalhador/empreendedor informal?\n\n Como por exemplo, costureira, pipoqueiro, marmiteiro, vendedor de utensílios, alimentos, produtos etc.",
       },
     ],
-    buttons: [
-    ],
+    buttons: [],
     inputs: [],
     responses: [],
     rows: [],
+    name: "age",
     radio: [
-      { value: "1",  name: 'age', label: { title: "Menos de 1 ano" } },
-      { value: "1-3", name: 'age', label: { title: "Entre 1 e 3 anos" } },
-      { value: "3-5", name: 'age', label: { title: "Entre 3 e 5 anos" } },
-      { value: "5-10", name: 'age', label: { title: "Entre 5 e 10 anos" } },
-      { value: "10", name: 'age', label: { title: "Mais de 10 anos" } },
+      { value: "1", label: { title: "Menos de 1 ano" } },
+      { value: "1-3", label: { title: "Entre 1 e 3 anos" } },
+      { value: "3-5", label: { title: "Entre 3 e 5 anos" } },
+      { value: "5-10", label: { title: "Entre 5 e 10 anos" } },
+      { value: "10", label: { title: "Mais de 10 anos" } },
     ],
     checkbox: [],
   },
@@ -165,5 +258,5 @@ const responses = [
 
 module.exports = {
   requests,
-  responses
-}
+  responses,
+};
